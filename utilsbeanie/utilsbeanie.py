@@ -2,29 +2,29 @@ from typing import Type
 
 from beanie import Document
 
-from utilsbeanie.actions import *
-from utilsbeanie.utility import *
+from utilsbeanie import actions
+from utilsbeanie import utility
 
 
-class Beanie(
-    DeleteMixin,
-    ExistMixin,
-    FetchByAggregationPipelineMixin,
-    FetchByGroupByAggregationPipelineMixin,
-    FetchSimpleMixin,
-    InsertMixin,
-    UpdateByObjMixin,
-    UpdateNoReturnMixin,
-    UpdateWithReturnMixin,
+class UtilsBeanie(
+    actions.DeleteMixin,
+    actions.ExistMixin,
+    actions.FetchByAggregationPipelineMixin,
+    actions.FetchByGroupByAggregationPipelineMixin,
+    actions.FetchSimpleMixin,
+    actions.InsertMixin,
+    actions.UpdateByObjMixin,
+    actions.UpdateNoReturnMixin,
+    actions.UpdateWithReturnMixin,
 
-    AggregationMixin,
-    GroupByAggregationMixin,
-    FetchSimpleMixin,
-    InsertMixin,
-    FilterForAggregationMixin,
-    FilterForGroupByAggregationMixin,
-    FilterMixin,
-    HelperMixin,
+    utility.AggregationMixin,
+    utility.GroupByAggregationMixin,
+    utility.FetchSimpleMixin,
+    utility.InsertMixin,
+    utility.FilterForAggregationMixin,
+    utility.FilterForGroupByAggregationMixin,
+    utility.FilterMixin,
+    utility.HelperMixin,
 ):
     def __init__(
         self,
