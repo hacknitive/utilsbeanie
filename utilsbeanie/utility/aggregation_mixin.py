@@ -13,16 +13,16 @@ from pydantic import BaseModel
 
 
 @runtime_checkable
-class CreateAggregationPipeLineUtilsMixinProtocol(Protocol):
+class AggregationMixinProtocol(Protocol):
     field_separator: str = "__"
 
 
-T = TypeVar("T", bound=CreateAggregationPipeLineUtilsMixinProtocol)
+T = TypeVar("T", bound=AggregationMixinProtocol)
 
 
-class CreateAggregationPipeLineUtilsMixin(Generic[T]):
+class AggregationMixin(Generic[T]):
     
-    def create_aggregation_pipeline(
+    def build_aggregation_pipeline(
         self,
         attributes: (
             tuple[tuple[str, Type[BaseModel]], ...] | None | tuple[dict[str, Any], ...]

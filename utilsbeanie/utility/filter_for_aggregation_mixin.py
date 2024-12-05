@@ -10,7 +10,7 @@ from typing import (
 
 
 @runtime_checkable
-class PrepareFilterForAggregationUtilsMixinProtocol(Protocol):
+class FilterForAggregationMixinProtocol(Protocol):
     field_separator: str = "__"
 
     def prepare_filter(
@@ -24,10 +24,10 @@ class PrepareFilterForAggregationUtilsMixinProtocol(Protocol):
     ) -> dict: ...
 
 
-T = TypeVar("T", bound=PrepareFilterForAggregationUtilsMixinProtocol)
+T = TypeVar("T", bound=FilterForAggregationMixinProtocol)
 
 
-class PrepareFilterForAggregationUtilsMixin(Generic[T]):
+class FilterForAggregationMixin(Generic[T]):
     def prepare_filter_for_aggregation(
         self: T,
         inputs: Dict[str, Any],

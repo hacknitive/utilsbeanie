@@ -11,15 +11,15 @@ from ..constant import DATETIME_BY_X_FORMAT
 
 
 @runtime_checkable
-class CreateGroupByAggregationUtilsMixinProtocol(Protocol):
+class GroupByAggregationMixinProtocol(Protocol):
     field_separator: str = "__"
 
 
-T = TypeVar("T", bound=CreateGroupByAggregationUtilsMixinProtocol)
+T = TypeVar("T", bound=GroupByAggregationMixinProtocol)
 
 
-class CreateGroupByAggregationUtilsMixin(Generic[T]):
-    def create_group_by_pipeline(
+class GroupByAggregationMixin(Generic[T]):
+    def build_group_by_pipeline(
         self: T,
         group_by_on: list[str],
     ) -> List[Dict]:
@@ -62,48 +62,9 @@ class CreateGroupByAggregationUtilsMixin(Generic[T]):
                 real_name = real_name.replace(datetime_key, "")
                 return alias_name, real_name
         return alias_name, real_name
-    def create_group_by_pipeline(
-        self: T,
-        group_by_on: list[str],
-    ) -> List[Dict]:
-        aggregation_pipeline = list()
-
-        add_field = dict()
-        group_id = dict()
-
-        for field_alias_name in group_by_on:
-            field_real_name = field_alias_name.replace(self.field_separator, ".")
-
-            if field_real_name.endswith(tuple(DATETIME_BY_X_FORMAT.keys())):
-                for datetime_key, datetime_value in DATETIME_BY_X_FORMAT.items():
-
-                    if field_real_name.endswith(datetime_key):
-                        field_alias_name = field_alias_name.replace(datetime_key, "")
-                        field_real_name = field_real_name.replace(datetime_key, "")
-
-                        add_field[field_alias_name] = {
-                            "$dateToString": {
-                                "format": datetime_value,
-                                "date": f"${field_real_name}",
-                            }
-                        }
-
-                        field_real_name = field_alias_name
-                        break
-
-            group_id[field_alias_name] = f"${field_real_name}"
-
-        if add_field:
-            aggregation_pipeline.append({"$addFields": add_field})
-
-        aggregation_pipeline.append(
-            {"$group": {"_id": group_id, "count": {"$sum": 1}}},
-        )
-
-        return aggregation_pipeline
 
     @staticmethod
-    def create_group_by_attributes(attributes_names: tuple[str, ...]) -> list[str]:
+    def build_group_by_attributes(attributes_names: tuple[str, ...]) -> list[str]:
         group_by_attributes = list()
         for i in attributes_names:
             if i.endswith("_at"):

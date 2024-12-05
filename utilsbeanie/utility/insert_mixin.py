@@ -16,13 +16,13 @@ from pymongo.errors import DuplicateKeyError
 
 
 @runtime_checkable
-class InsertUtilsMixinProtocol(Protocol):
+class InsertMixinProtocol(Protocol):
     document: Document
 
-T = TypeVar("T", bound=InsertUtilsMixinProtocol)
+T = TypeVar("T", bound=InsertMixinProtocol)
 
 
-class InsertUtilsMixin(Generic[T]):
+class InsertMixin(Generic[T]):
     @staticmethod
     def calculate_epoch_pid() -> int:
         return int(f"{time():.0f}{randrange(1000, 10000)}")

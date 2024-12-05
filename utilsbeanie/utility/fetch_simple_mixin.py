@@ -22,7 +22,7 @@ from ..constant import EnumOrderBy
 
 
 @runtime_checkable
-class FetchSimpleUtilsMixinProtocol(Protocol):
+class FetchSimpleMixinProtocol(Protocol):
     document: Document
 
     @staticmethod
@@ -39,10 +39,10 @@ class FetchSimpleUtilsMixinProtocol(Protocol):
     ) -> dict: ...
 
 
-T = TypeVar("T", bound=FetchSimpleUtilsMixinProtocol)
+T = TypeVar("T", bound=FetchSimpleMixinProtocol)
 
 
-class FetchSimpleUtilsMixin(Generic[T]):
+class FetchSimpleMixin(Generic[T]):
 
     def create_fetch_list_by_filter_query(
         self: T,

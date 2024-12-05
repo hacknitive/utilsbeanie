@@ -6,7 +6,7 @@ from utilsbeanie.actions import *
 from utilsbeanie.utility import *
 
 
-class UtilsBeanie(
+class Beanie(
     DeleteMixin,
     ExistMixin,
     FetchByAggregationPipelineMixin,
@@ -17,14 +17,14 @@ class UtilsBeanie(
     UpdateNoReturnMixin,
     UpdateWithReturnMixin,
 
-    CreateAggregationPipeLineUtilsMixin,
-    CreateGroupByAggregationUtilsMixin,
-    FetchSimpleUtilsMixin,
-    InsertUtilsMixin,
-    PrepareFilterForAggregationUtilsMixin,
-    PrepareFilterForGroupByAggregationUtilsMixin,
-    PrepareFilterUtilsMixin,
-    UtilityMixin,
+    AggregationMixin,
+    GroupByAggregationMixin,
+    FetchSimpleMixin,
+    InsertMixin,
+    FilterForAggregationMixin,
+    FilterForGroupByAggregationMixin,
+    FilterMixin,
+    HelperMixin,
 ):
     def __init__(
         self,

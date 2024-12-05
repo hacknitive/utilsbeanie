@@ -18,14 +18,14 @@ from ..constant import EnumOrderBy
 
 
 @runtime_checkable
-class UtilityMixinProtocol(Protocol):
+class HelperMixinProtocol(Protocol):
     field_separator: str = "__"
 
 
-T = TypeVar("T", bound=UtilityMixinProtocol)
+T = TypeVar("T", bound=HelperMixinProtocol)
 
 
-class UtilityMixin(Generic[T]):
+class HelperMixin(Generic[T]):
     @staticmethod
     def prepare_skip_limit(
         current_page: Optional[int] = None,

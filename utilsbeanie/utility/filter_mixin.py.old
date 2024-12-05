@@ -11,14 +11,14 @@ from typing import (
 
 
 @runtime_checkable
-class PrepareFilterUtilsMixinProtocol(Protocol):
+class PrepareFilterMixinProtocol(Protocol):
     ...
 
 
-T = TypeVar("T", bound=PrepareFilterUtilsMixinProtocol)
+T = TypeVar("T", bound=PrepareFilterMixinProtocol)
 
 
-class PrepareFilterUtilsMixin(Generic[T]):
+class PrepareFilterMixin(Generic[T]):
     def prepare_filter(
         self,
         inputs: Dict[str, Any],
