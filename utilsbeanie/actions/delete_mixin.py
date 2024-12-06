@@ -37,7 +37,7 @@ class DeleteMixin(Generic[T]):
         self: T,
         id_: PydanticObjectId,
     ) -> None:
-        return await self.document.find_one({"id": id_}).delete()
+        return await self.document.find_one({"_id": id_}).delete()
 
     async def delete_one_by_pid(
         self: T,

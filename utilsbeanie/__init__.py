@@ -1,1 +1,1 @@
-from utilsdatabase import logo
+from utilsbeanie import logo

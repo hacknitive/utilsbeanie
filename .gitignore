@@ -133,3 +133,5 @@ note.txt
 concat_files.py
 included_files.txt
 concatenated_output.txt
+file_extractor.py
+result_from_chatgpt.txt
