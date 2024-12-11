@@ -44,7 +44,7 @@ class HelperMixin(Generic[T]):
         if skip_limit_dictionary:
             return skip_limit_dictionary
 
-        if page_size > 0:
+        if page_size and page_size > 0:
             number_of_document_2_skip = max(current_page - 1, 0) * page_size
 
             skip_limit_dictionary["skip"] = number_of_document_2_skip
@@ -78,7 +78,7 @@ class HelperMixin(Generic[T]):
 
         return skip_limit_list
 
-    def convert_order_by_to_sort_for_aggregation(
+    def convert_order_by_to_sort(
         self:T,
         order_by: Dict[str, EnumOrderBy] | None = None,
     ) -> List:

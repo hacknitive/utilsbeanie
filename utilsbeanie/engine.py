@@ -24,6 +24,7 @@ class Engin:
         self.authdb = authdb
         self.connection_string = connection_string
 
+    @staticmethod
     async def init_beanie(
         connection_string: str, 
         database: str, 
@@ -36,6 +37,7 @@ class Engin:
             document_models=list_of_documents_pathes,
         )
 
+    @staticmethod
     def create_connection_string(
         host: str,
         port: int | str,

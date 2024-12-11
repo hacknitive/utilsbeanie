@@ -201,7 +201,7 @@ class FetchSimpleMixin(Generic[T]):
         nesting_depths_per_field: Optional[Dict[str, int]] = None,
         **pymongo_kwargs,
     ) -> dict:
-        query = await self.create_fetch_list_by_filter_query(
+        query = self.create_fetch_list_by_filter_query(
             filter_,
             projection_model=projection_model,
             **self.prepare_skip_limit(
@@ -232,7 +232,7 @@ class FetchSimpleMixin(Generic[T]):
         }
 
     async def fetch_count(
-        document: Type[Document],
+        self: T,
         filter_: Dict,
     ) -> int:
-        return await document.find(filter_).count()
+        return await self.document.find(filter_).count()

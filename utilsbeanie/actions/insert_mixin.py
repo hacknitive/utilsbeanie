@@ -15,11 +15,7 @@ class InsertMixinProtocol(Protocol):
     document: Document
 
     @staticmethod
-    def calculate_epoch_pid() -> int: ...
-
-    async def calculate_incremental_pid(
-        self,
-    ) -> int: ...
+    def calculate_epoch_pid(min: int = 1000, max: int = 10000) -> int: ...
 
 
 T = TypeVar("T", bound=InsertMixinProtocol)
@@ -34,11 +30,11 @@ class InsertMixin(Generic[T]):
         await obj.insert()
         return obj
 
-    async def insert_one_by_epoch_pid(self: T, inputs: Dict) -> Document:
+    async def insert_one_by_epoch_pid(self: T, inputs: Dict, min=1000, max=10000) -> Document:
         while True:
             try:
                 inputs_with_pid = {
-                    "pid": self.calculate_epoch_pid(),
+                    "pid": self.calculate_epoch_pid(min=min, max=max),
                     **inputs,
                 }
                 obj = self.document(**inputs_with_pid)
@@ -49,12 +45,3 @@ class InsertMixin(Generic[T]):
                     raise
                 if e.details.get("keyPattern") != {"pid": 1}:
                     raise
-
-    async def insert_one_by_incremental_pid(self: T, inputs: Dict) -> Document:
-        inputs_with_pid = {
-            "pid": await self.calculate_incremental_pid(),
-            **inputs,
-        }
-        obj = self.document(**inputs_with_pid)
-        await obj.insert()
-        return obj

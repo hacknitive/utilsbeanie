@@ -47,7 +47,7 @@ cov-show() {
 
 # Function to display usage
 usage() {
-    echo "Usage: $0 {up|log|up-build|up-web|test|shell|stop|lint-code|down|deep-clean|help}"
+    echo "Usage: $0 {up-infra|stop-infra|down-infra|infra-test|test|cov-test|cov-show|help}"
     echo
     echo "Commands:"
     echo "  up-infra        Bring Mongodb container up."

@@ -52,7 +52,7 @@ class ExistMixin(Generic[T]):
         exception_creater_func: callable = None,
     ) -> bool:
         result = await self.document.find_one(
-            {"id": id_},
+            {"_id": id_},
             fetch_links=False,
         ).exists()
 
@@ -125,7 +125,7 @@ class ExistMixin(Generic[T]):
         exception_creater_func: callable = None,
     ) -> bool:
         result = await self.document.find_one(
-            {"id": id_},
+            {"_id": id_},
             fetch_links=False,
         ).exists()
 
